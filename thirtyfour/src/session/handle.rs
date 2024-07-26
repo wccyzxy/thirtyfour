@@ -190,6 +190,13 @@ impl SessionHandle {
         Ok(())
     }
 
+    /// Navigate to the specified URL.
+    pub async fn goto_without_deal(&self, url: impl IntoArcStr) -> WebDriverResult<()> {
+        let url = url.into();
+        self.cmd(Command::NavigateTo(url)).await?;
+        Ok(())
+    }
+
     /// Navigate to the specified URL. Alias of goto().
     pub async fn get(&self, url: impl IntoArcStr) -> WebDriverResult<()> {
         self.goto(url).await
